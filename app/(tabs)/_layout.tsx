@@ -4,6 +4,7 @@ import { Image, View } from "react-native";
 import { colors, components } from '@/constants/theme'
 import { clsx } from "clsx";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SubscriptionsProvider } from "@/components/SubscriptionsProvider";
 
 const tabBar = components.tabBar;
 
@@ -20,6 +21,7 @@ const TabLayout = () => {
         const insets = useSafeAreaInsets();
 
         return (
+          <SubscriptionsProvider>
             <Tabs
                 screenOptions={{
                         headerShown: false,
@@ -56,6 +58,7 @@ const TabLayout = () => {
                             }}/>
                     ))}
             </Tabs>
+          </SubscriptionsProvider>
         )
 }
 
