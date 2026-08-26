@@ -6,6 +6,7 @@ import AuthField from "@/components/auth/AuthField";
 import AuthScaffold from "@/components/auth/AuthScaffold";
 import { colors } from "@/constants/theme";
 import { getClerkErrorMessage, getCodeValidationMessage, getEmailValidationMessage, getPasswordValidationMessage } from "@/lib/auth";
+import { posthog } from "@/lib/posthog";
 
 type FieldErrors = Partial<Record<"email" | "password" | "confirmPassword" | "code", string>>;
 
@@ -58,6 +59,7 @@ export default function SignUpScreen() {
     }
     const { error: finalizeError } = await signUp.finalize();
     if (finalizeError) setFormError(getClerkErrorMessage(finalizeError));
+    else posthog?.capture("account_created");
   };
 
   const resendCode = async () => {

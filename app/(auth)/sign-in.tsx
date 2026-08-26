@@ -6,6 +6,7 @@ import AuthField from "@/components/auth/AuthField";
 import AuthScaffold from "@/components/auth/AuthScaffold";
 import { colors } from "@/constants/theme";
 import { getClerkErrorMessage, getCodeValidationMessage, getEmailValidationMessage, getPasswordValidationMessage } from "@/lib/auth";
+import { posthog } from "@/lib/posthog";
 
 type Step = "sign-in" | "mfa" | "forgot" | "reset-code" | "new-password";
 type FieldErrors = Partial<Record<"email" | "password" | "code" | "confirmPassword", string>>;
@@ -22,10 +23,11 @@ export default function SignInScreen() {
   const [notice, setNotice] = useState<string>();
   const busy = fetchStatus === "fetching";
 
-  const finishIfComplete = async () => {
+  const finishIfComplete = async (event = "user_signed_in") => {
     if (signIn.status !== "complete") return false;
     const { error } = await signIn.finalize();
     if (error) setFormError(getClerkErrorMessage(error));
+    else posthog?.capture(event);
     return true;
   };
 
@@ -79,7 +81,7 @@ export default function SignInScreen() {
     if (Object.values(nextErrors).some(Boolean)) return;
     const { error } = await signIn.resetPasswordEmailCode.submitPassword({ password, signOutOfOtherSessions: true });
     if (error) { setFormError(getClerkErrorMessage(error)); return; }
-    await finishIfComplete();
+    await finishIfComplete("password_reset_completed");
   };
 
   const resetToSignIn = async () => {
