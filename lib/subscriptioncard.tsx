@@ -38,8 +38,8 @@ const SubscriptionCard = ({ name, price, currency, icon, billing, color, categor
         </View>
 
         {expanded && (
-            <View className="sub-bdy">
-                <Text className="sub-details">
+            <View className="sub-body">
+                <View className="sub-details">
                     <View className="sub-row">
                         <View className="sub-row-copy">
                             <Text className="sub-label">Payment:</Text>
@@ -81,7 +81,7 @@ const SubscriptionCard = ({ name, price, currency, icon, billing, color, categor
                             }</Text>
                         </View>
                     </View>
-                </Text>
+                </View>
             </View>
         )}
     </Pressable>
