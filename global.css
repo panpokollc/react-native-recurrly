@@ -246,6 +246,10 @@
         @apply mt-2 items-center;
     }
 
+    .auth-brand-block-compact {
+        @apply items-center;
+    }
+
     .auth-logo-wrap {
         @apply mb-7 flex-row items-center gap-3;
     }
@@ -316,6 +320,18 @@
 
     .auth-button-text {
         @apply text-base font-sans-bold text-primary;
+    }
+
+    .auth-notice {
+        @apply rounded-2xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm font-sans-medium text-destructive;
+    }
+
+    .auth-success-notice {
+        @apply rounded-2xl border border-success/20 bg-success/5 px-4 py-3 text-sm font-sans-medium text-success;
+    }
+
+    .auth-inline-action {
+        @apply self-end py-1 text-sm font-sans-bold text-accent;
     }
 
     .auth-secondary-button {
