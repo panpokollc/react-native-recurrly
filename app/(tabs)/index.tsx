@@ -40,7 +40,7 @@ export default function App() {
                 />
 
                 <Text className="home-user-name" numberOfLines={1}>
-                  {user?.username ?? user?.primaryEmailAddress?.emailAddress ?? HOME_USER.name}
+                  {user?.fullName ?? user?.primaryEmailAddress?.emailAddress ?? HOME_USER.name}
                 </Text>
               </View>
 
